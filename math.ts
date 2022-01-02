@@ -13,3 +13,5 @@ const stdev = (numbers: number[]) => {
 
   return Math.sqrt(variance);
 };
+
+export { sum, mean, stdev };
