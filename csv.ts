@@ -23,3 +23,9 @@ export const loadCSV = async (path: string): Promise<any[]> => {
 
   return data;
 };
+
+export const strColToFloat = (dataset: any[], col: number): void => {
+  for (const row of dataset) {
+    row[col] = parseFloat(row[col].trim());
+  }
+};
