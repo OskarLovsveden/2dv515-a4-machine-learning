@@ -12,3 +12,14 @@ const parser = (path: string): Parser => {
 
   return parser;
 };
+
+export const loadCSV = async (path: string): Promise<any[]> => {
+  const data = [];
+  const p = parser(path);
+
+  for await (const r of p) {
+    data.push(r);
+  }
+
+  return data;
+};
