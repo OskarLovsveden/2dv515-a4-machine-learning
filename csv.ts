@@ -24,8 +24,27 @@ export const loadCSV = async (path: string): Promise<any[]> => {
   return data;
 };
 
-export const strColToFloat = (dataset: any[], col: number): void => {
+const strColToFloat = (dataset: any[], col: number): void => {
   for (const row of dataset) {
     row[col] = parseFloat(row[col].trim());
   }
 };
+
+const strColToInt = (dataset: any[], col: number): void => {
+  const unique = new Set<string>();
+  const lookup = new Map<string, number>();
+
+  for (const row of dataset) {
+    unique.add(row[col].trim());
+  }
+
+  for (const [i, value] of [...unique].entries()) {
+    lookup.set(value, i);
+  }
+
+  for (const row of dataset) {
+    row[col] = lookup.get(row[col]);
+  }
+};
+
+export { strColToFloat, strColToInt };
