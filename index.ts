@@ -1,8 +1,10 @@
 import { loadCSV, strColToFloat, strColToInt } from "./csv";
+import { mean, stdev } from "./math";
 
 const main = async () => {
   // const dataset = await getData("./data/banknote_authentication.csv");
-  //   const dataset = await loadCSV("./data/iris.csv");
+  // const dataset = await loadCSV("./data/iris.csv");
+
   const dataset = [
     [3.393533211, 2.331273381, 0],
     [3.110073483, 1.781539638, 0],
@@ -15,7 +17,9 @@ const main = async () => {
     [7.792783481, 3.424088941, 1],
     [7.939820817, 0.791637231, 1],
   ];
-  console.log(separateByClass(dataset));
+
+  console.log(summarizeDataset(dataset));
+
   //   for (let i = 0; i < dataset[0].length - 1; i++) {
   //     strColToFloat(dataset, i);
   //   }
@@ -37,6 +41,17 @@ const separateByClass = (dataset: number[][]): Map<number, number[][]> => {
   }
 
   return separated;
+};
+
+const summarizeDataset = (dataset: number[][]): number[][] => {
+  const summaries = [];
+
+  for (let i = 0; i < dataset[0].length - 1; i++) {
+    const col = dataset.map((x) => x[i]);
+    summaries.push([mean(col), stdev(col), col.length]);
+  }
+
+  return summaries;
 };
 
 main();
