@@ -13,7 +13,7 @@ const parser = (path: string): Parser => {
   return parser;
 };
 
-export const loadCSV = async (path: string): Promise<any[]> => {
+const loadCSV = async (path: string): Promise<any[]> => {
   const data = [];
   const p = parser(path);
 
@@ -47,4 +47,4 @@ const strColToInt = (dataset: any[], col: number): void => {
   }
 };
 
-export { strColToFloat, strColToInt };
+export { loadCSV, strColToFloat, strColToInt };
