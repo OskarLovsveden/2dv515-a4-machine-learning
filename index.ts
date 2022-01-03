@@ -1,5 +1,5 @@
-import { loadCSV, strColToFloat, strColToInt } from "./csv";
-import { mean, stdev } from "./math";
+import { loadCSV, strColToFloat, strColToInt } from "./utils/csv";
+import { mean, stdev } from "./utils/math";
 
 const main = async () => {
   // const dataset = await getData("./data/banknote_authentication.csv");
@@ -18,13 +18,13 @@ const main = async () => {
     [7.939820817, 0.791637231, 1],
   ];
 
-  console.log(summarizeDataset(dataset));
+  // for (let i = 0; i < dataset[0].length - 1; i++) {
+  //   strColToFloat(dataset, i);
+  // }
+  // strColToInt(dataset, dataset[0].length - 1);
 
-  //   for (let i = 0; i < dataset[0].length - 1; i++) {
-  //     strColToFloat(dataset, i);
-  //   }
-  //   strColToInt(dataset, dataset[0].length - 1);
-  //   const model = summarizeByClass(dataset);
+  const model = summarizeByClass(dataset);
+  console.log(model);
 };
 
 const separateByClass = (dataset: number[][]): Map<number, number[][]> => {
@@ -41,6 +41,19 @@ const separateByClass = (dataset: number[][]): Map<number, number[][]> => {
   }
 
   return separated;
+};
+
+const summarizeByClass = (dataset: number[][]): Map<number, number[][]> => {
+  const separated = separateByClass(dataset);
+  const summaries = new Map<number, number[][]>();
+
+  for (const [classValue, rows] of separated.entries()) {
+    if (!summaries.has(classValue)) {
+      summaries.set(classValue, summarizeDataset(rows));
+    }
+  }
+
+  return summaries;
 };
 
 const summarizeDataset = (dataset: number[][]): number[][] => {
