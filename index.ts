@@ -4,27 +4,20 @@ import { mean, stdev } from "./utils/math";
 const main = async () => {
   // const dataset = await getData("./data/banknote_authentication.csv");
   // const dataset = await loadCSV("./data/iris.csv");
-
-  const dataset = [
-    [3.393533211, 2.331273381, 0],
-    [3.110073483, 1.781539638, 0],
-    [1.343808831, 3.368360954, 0],
-    [3.582294042, 4.67917911, 0],
-    [2.280362439, 2.866990263, 0],
-    [7.423436942, 4.696522875, 1],
-    [5.745051997, 3.533989803, 1],
-    [9.172168622, 2.511101045, 1],
-    [7.792783481, 3.424088941, 1],
-    [7.939820817, 0.791637231, 1],
-  ];
-
   // for (let i = 0; i < dataset[0].length - 1; i++) {
   //   strColToFloat(dataset, i);
   // }
   // strColToInt(dataset, dataset[0].length - 1);
+  // TESTS BELOW
 
-  const model = summarizeByClass(dataset);
-  console.log(model);
+  console.log(calculateProbability(1.0, 1.0, 1.0));
+  console.log(calculateProbability(2.0, 1.0, 1.0));
+  console.log(calculateProbability(0.0, 1.0, 1.0));
+};
+
+const calculateProbability = (x: number, mean: number, stdev: number) => {
+  const exponent = Math.exp(-((x - mean) ** 2 / (2 * stdev ** 2)));
+  return (1 / (Math.sqrt(2 * Math.PI) * stdev)) * exponent;
 };
 
 const separateByClass = (dataset: number[][]): Map<number, number[][]> => {
