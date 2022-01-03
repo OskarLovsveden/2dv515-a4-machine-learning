@@ -7,9 +7,9 @@ const mean = (numbers: number[]) => {
 };
 
 const stdev = (numbers: number[]) => {
-  const avg = mean(numbers);
-  const variance =
-    sum(numbers.map((x: number) => (x - avg) ** 2)) / numbers.length - 1;
+  const m = mean(numbers);
+  const arr = numbers.map((x) => (x - m) ** 2);
+  const variance = sum(arr) / (numbers.length - 1);
 
   return Math.sqrt(variance);
 };
