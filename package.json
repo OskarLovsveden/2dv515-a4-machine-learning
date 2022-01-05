@@ -1,0 +1,22 @@
+{
+  "name": "a4-machine-learning",
+  "version": "1.0.0",
+  "description": "2dv515 A4",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:2dv515/student/ol222hf/a4-machine-learning.git"
+  },
+  "author": "Oskar Lövsveden",
+  "license": "ISC",
+  "dependencies": {
+    "csv": "^6.0.5",
+    "ts-node": "^10.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.6"
+  }
+}
